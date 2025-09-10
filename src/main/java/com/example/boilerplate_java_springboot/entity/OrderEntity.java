@@ -32,6 +32,8 @@ public class OrderEntity {
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
+    private Boolean isUsed;
+
     @ManyToOne
     @JoinColumn(name = "event_id")
     private EventEntity eventEntity;
