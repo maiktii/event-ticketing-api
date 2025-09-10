@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -21,14 +21,16 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping
-    public ResponseEntity<OrderResponse<OrderEntity>> createUser(@Valid @RequestBody CreateOrderRequest createOrderRequest){
-        return orderService.createUser(createOrderRequest);
+    @PutMapping
+    public ResponseEntity<OrderResponse<OrderEntity>> createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest){
+        return orderService.createOrder(createOrderRequest);
     }
 
-    @GetMapping("/{id}/event")
-    public ResponseEntity<OrderResponse<List<EventEntity>>> getListParticipantByEventID(
-            @PathVariable Long id){
-        return orderService.getListEventByParticipantId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderResponse<OrderEntity>> findOrderDetailById(@PathVariable Long id){
+        return orderService.findOrderDetailById(id);
     }
+
+
+
 }
