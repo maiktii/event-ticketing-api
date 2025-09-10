@@ -26,7 +26,6 @@ public class OrderEntity {
 
     private double totalAmount;
 
-    @Enumerated(EnumType.STRING)
     private String orderStatus;
 
     private LocalDateTime createdAt;
