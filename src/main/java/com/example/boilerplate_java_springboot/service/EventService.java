@@ -14,11 +14,11 @@ import java.util.Optional;
 public class EventService {
 
     private final EventRepository eventRepository;
-    private final OrderRepository orderRepository;
+//    private final OrderRepository orderRepository;
 
-    public EventService(EventRepository eventRepository, OrderRepository orderRepository){
+    public EventService(EventRepository eventRepository){
         this.eventRepository = eventRepository;
-        this.orderRepository = orderRepository;
+//        this.orderRepository = orderRepository;
     }
 
     public EventEntity createEvent(EventRequest eventRequest){

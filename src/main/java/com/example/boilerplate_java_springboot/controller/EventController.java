@@ -28,30 +28,13 @@ public class EventController {
     }
 
     @GetMapping
-    public List<EventEntity> getAllEvent(){
+    public List<EventEntity> getAllEvents(){
         return eventService.getAllEvent();
     }
 
-    @GetMapping
-    public Optional<EventEntity> getEventById(Long id){
+    @GetMapping("/{id}")
+    public Optional<EventEntity> getEventById(@PathVariable Long id){
         return eventService.getEventById(id);
     }
 
-
-
-//    @PostMapping
-//    public ResponseEntity<EventResponse<EventEntity>> CreateEvent(
-//            @Valid @RequestBody EventRequest eventRequest){
-//        return eventService.createEvent(eventRequest);
-//    }
-//
-//    @GetMapping
-//    public ResponseEntity<EventResponse<List<EventEntity>>> getAllEvent(){
-//        return eventService.getAllData();
-//    }
-//
-//    @GetMapping("/{id}/user")
-//    public ResponseEntity<EventResponse<List<OrderEntity>>> getListEventByParticipantId(@PathVariable Long id){
-//        return eventService.getListEventByParticipantId(id);
-//    }
 }
