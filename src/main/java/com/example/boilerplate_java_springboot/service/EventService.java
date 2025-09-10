@@ -1,12 +1,16 @@
 package com.example.boilerplate_java_springboot.service;
 
 import com.example.boilerplate_java_springboot.dto.event.EventRequest;
+import com.example.boilerplate_java_springboot.dto.event.EventResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
 import com.example.boilerplate_java_springboot.repository.EventRepository;
 import com.example.boilerplate_java_springboot.repository.OrderRepository;
 import jdk.jfr.Event;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +38,28 @@ public class EventService {
     public Optional<EventEntity> getEventById(Long id){
         Optional<EventEntity> eventEntity = eventRepository.findById(id);
         return eventEntity;
+    }
+
+    public EventEntity updateEventById (Long id, EventRequest eventRequest){
+
+        //1. cari data berdasarkan id
+        Optional<EventEntity> eventEntityopt = eventRepository.findById(id);
+        if (eventEntityopt.isEmpty()){
+            throw new RuntimeException("Entity Not Found");
+        }
+        EventEntity eventEntity = eventEntityopt.get();
+
+        //2. kalau datanya ada maka ubah data yang sudah ada dengan data baru dengan inputan
+        eventEntity.setEventName(eventRequest.getEventName());
+        eventEntity.setEventAddress(eventRequest.getEventAddress());
+        eventEntity.setLocation(eventEntity.getLocation());
+        eventEntity.setCapacity(eventEntity.getCapacity());
+
+        //3. save data baru tersebut
+        eventEntity = eventRepository.save(eventEntity);
+        //4. balikin nilainya ke response
+        return eventEntity;
+
     }
 
 
