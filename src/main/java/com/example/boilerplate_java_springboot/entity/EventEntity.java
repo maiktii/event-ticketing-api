@@ -22,7 +22,7 @@ public class EventEntity {
 
     private int capacity;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderEntity> Order;
+    @OneToMany(mappedBy = "eventEntity")
+    private List<OrderEntity> order;
 
 }
