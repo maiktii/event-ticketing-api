@@ -1,6 +1,6 @@
 package com.example.boilerplate_java_springboot.controller;
 
-import com.example.boilerplate_java_springboot.dto.event.CreateEventRequest;
+import com.example.boilerplate_java_springboot.dto.event.EventRequest;
 import com.example.boilerplate_java_springboot.dto.event.EventResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
 import com.example.boilerplate_java_springboot.entity.OrderEntity;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/event")
@@ -21,19 +22,36 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @PostMapping
-    public ResponseEntity<EventResponse<EventEntity>> CreateEvent(
-            @Valid @RequestBody CreateEventRequest createEventRequest){
-        return eventService.createEvent(createEventRequest);
+    @PostMapping("/createEvent")
+    public EventEntity createEvent(@RequestBody EventRequest eventRequest){
+        return eventService.createEvent(eventRequest);
     }
 
     @GetMapping
-    public ResponseEntity<EventResponse<List<EventEntity>>> getAllEvent(){
-        return eventService.getAllData();
+    public List<EventEntity> getAllEvent(){
+        return eventService.getAllEvent();
     }
 
-    @GetMapping("/{id}/user")
-    public ResponseEntity<EventResponse<List<OrderEntity>>> getListEventByParticipantId(@PathVariable Long id){
-        return eventService.getListEventByParticipantId(id);
+    @GetMapping
+    public Optional<EventEntity> getEventById(Long id){
+        return eventService.getEventById(id);
     }
+
+
+
+//    @PostMapping
+//    public ResponseEntity<EventResponse<EventEntity>> CreateEvent(
+//            @Valid @RequestBody EventRequest eventRequest){
+//        return eventService.createEvent(eventRequest);
+//    }
+//
+//    @GetMapping
+//    public ResponseEntity<EventResponse<List<EventEntity>>> getAllEvent(){
+//        return eventService.getAllData();
+//    }
+//
+//    @GetMapping("/{id}/user")
+//    public ResponseEntity<EventResponse<List<OrderEntity>>> getListEventByParticipantId(@PathVariable Long id){
+//        return eventService.getListEventByParticipantId(id);
+//    }
 }

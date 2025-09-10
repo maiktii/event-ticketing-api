@@ -3,6 +3,8 @@ package com.example.boilerplate_java_springboot.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -16,4 +18,11 @@ public class EventEntity {
 
     private String eventName;
     private String eventAddress;
+    private String location;
+
+    private int capacity;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderEntity> Order;
+
 }

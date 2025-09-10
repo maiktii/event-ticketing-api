@@ -11,10 +11,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateEventRequest {
+public class EventRequest {
     @NotBlank
     private String eventName;
 
     @NotBlank
     private String eventAddress;
+
+    @NotBlank
+    private String location;
+
+    @NotBlank
+    private int capacity;
 }
