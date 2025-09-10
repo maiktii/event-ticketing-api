@@ -42,6 +42,4 @@ public class EventController {
         EventEntity eventEntity = eventService.updateEventById(id, eventRequest);
         return eventEntity;
     }
-
-
 }
