@@ -3,10 +3,9 @@ package com.example.boilerplate_java_springboot.controller;
 import com.example.boilerplate_java_springboot.dto.event.CreateEventRequest;
 import com.example.boilerplate_java_springboot.dto.event.EventResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
-import com.example.boilerplate_java_springboot.entity.UserEntity;
+import com.example.boilerplate_java_springboot.entity.OrderEntity;
 import com.example.boilerplate_java_springboot.service.EventService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class EventController {
     }
 
     @GetMapping("/{id}/user")
-    public ResponseEntity<EventResponse<List<UserEntity>>> getListEventByParticipantId(@PathVariable Long id){
+    public ResponseEntity<EventResponse<List<OrderEntity>>> getListEventByParticipantId(@PathVariable Long id){
         return eventService.getListEventByParticipantId(id);
     }
 }

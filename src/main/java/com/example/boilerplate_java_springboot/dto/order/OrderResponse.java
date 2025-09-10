@@ -1,4 +1,4 @@
-package com.example.boilerplate_java_springboot.dto.user;
+package com.example.boilerplate_java_springboot.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse<T> {
+public class OrderResponse<T> {
     private int statusCode;
     private String message;
     private LocalDateTime timestamp;

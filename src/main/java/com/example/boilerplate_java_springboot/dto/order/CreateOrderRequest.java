@@ -1,6 +1,5 @@
-package com.example.boilerplate_java_springboot.dto.user;
+package com.example.boilerplate_java_springboot.dto.order;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateUserRequest {
+public class CreateOrderRequest {
 
     @NotNull
     private int eventID;
