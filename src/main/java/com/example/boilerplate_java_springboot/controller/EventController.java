@@ -1,5 +1,6 @@
 package com.example.boilerplate_java_springboot.controller;
 
+import com.example.boilerplate_java_springboot.dto.event.EventEntityResponse;
 import com.example.boilerplate_java_springboot.dto.event.EventRequest;
 import com.example.boilerplate_java_springboot.dto.event.EventResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
@@ -41,5 +42,10 @@ public class EventController {
     public EventEntity updateEventById(@PathVariable Long id ,@RequestBody EventRequest eventRequest){
         EventEntity eventEntity = eventService.updateEventById(id, eventRequest);
         return eventEntity;
+    }
+
+    @GetMapping("/{id}/orders")
+    public EventEntityResponse getOrderByEventId(@PathVariable Long id){
+        return eventService.getOrderByEventId(id);
     }
 }

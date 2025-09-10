@@ -38,21 +38,21 @@ public class OrderService {
           return ResponseEntity.ok(responseOrder);
       }
 
-      if(!createOrderRequest.getOrderStatus().equalsIgnoreCase("PENDING")
-      && !createOrderRequest.getOrderStatus().equalsIgnoreCase("PAID")
-      && !createOrderRequest.getOrderStatus().equalsIgnoreCase("REFUNED")){
-          responseOrder.setStatusCode(HttpStatus.BAD_REQUEST.value());
-          responseOrder.setMessage("Order Status Invalid!");
-          responseOrder.setTimestamp(LocalDateTime.now());
-          responseOrder.setResult(null);
-          return ResponseEntity.ok(responseOrder);
-      }
+//      if(!createOrderRequest.getOrderStatus().equalsIgnoreCase("PENDING")
+//      && !createOrderRequest.getOrderStatus().equalsIgnoreCase("PAID")
+//      && !createOrderRequest.getOrderStatus().equalsIgnoreCase("REFUNED")){
+//          responseOrder.setStatusCode(HttpStatus.BAD_REQUEST.value());
+//          responseOrder.setMessage("Order Status Invalid!");
+//          responseOrder.setTimestamp(LocalDateTime.now());
+//          responseOrder.setResult(null);
+//          return ResponseEntity.ok(responseOrder);
+//      }
 
       OrderEntity orderEntity = orderRepository.save(OrderEntity.builder()
                       .id(null).nameOrder(createOrderRequest.getNameOrder())
                       .emailOrder(createOrderRequest.getEmailOrder())
                       .totalAmount(createOrderRequest.getTotalAmount())
-                      .orderStatus(createOrderRequest.getOrderStatus())
+                      .orderStatus(createOrderRequest.getOrderStatus().toString())
                       .eventEntity(dataEvent)
                       .isUsed(false)
                       .createdAt(LocalDateTime.now())

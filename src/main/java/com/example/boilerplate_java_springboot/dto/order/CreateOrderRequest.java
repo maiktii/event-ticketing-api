@@ -1,5 +1,6 @@
 package com.example.boilerplate_java_springboot.dto.order;
 
+import com.example.boilerplate_java_springboot.entity.EventStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -29,7 +30,7 @@ public class CreateOrderRequest {
 
     @NotBlank
     @JsonProperty("order_status")
-    private String orderStatus;
+    private EventStatus orderStatus;
 
     @DecimalMin("0.00")
     @JsonProperty("total_amount")
