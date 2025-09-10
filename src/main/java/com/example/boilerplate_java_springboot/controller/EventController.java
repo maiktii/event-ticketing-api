@@ -23,7 +23,7 @@ public class EventController {
     }
 
     @PostMapping("/createEvent")
-    public EventEntity createEvent(@RequestBody EventRequest eventRequest){
+    public EventEntity createEvent(@Valid @RequestBody EventRequest eventRequest){
         return eventService.createEvent(eventRequest);
     }
 
@@ -36,5 +36,12 @@ public class EventController {
     public Optional<EventEntity> getEventById(@PathVariable Long id){
         return eventService.getEventById(id);
     }
+
+    @PutMapping("/{id}")
+    public EventEntity updateEventById(@PathVariable Long id ,@RequestBody EventRequest eventRequest){
+        EventEntity eventEntity = eventService.updateEventById(id, eventRequest);
+        return eventEntity;
+    }
+
 
 }
