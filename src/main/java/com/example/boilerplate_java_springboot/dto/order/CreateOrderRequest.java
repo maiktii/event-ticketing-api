@@ -28,6 +28,7 @@ public class CreateOrderRequest {
     private String emailOrder;
 
     @NotBlank
+    @JsonProperty("order_status")
     private String orderStatus;
 
     @DecimalMin("0.00")
