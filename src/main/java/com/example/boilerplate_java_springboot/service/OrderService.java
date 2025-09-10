@@ -1,6 +1,7 @@
 package com.example.boilerplate_java_springboot.service;
 
 import com.example.boilerplate_java_springboot.dto.order.CreateOrderRequest;
+import com.example.boilerplate_java_springboot.dto.order.CreateOrderResponse;
 import com.example.boilerplate_java_springboot.dto.order.OrderResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
 import com.example.boilerplate_java_springboot.entity.OrderEntity;
@@ -60,10 +61,15 @@ public class OrderService {
                       .deletedAt(null)
               .build());
 
+      var orderResponse = new CreateOrderResponse(orderEntity.getId(),
+              orderEntity.getNameOrder(), orderEntity.getEmailOrder(), orderEntity.getTotalAmount(),
+              orderEntity.getOrderStatus(), orderEntity.getCreatedAt(), orderEntity.getUpdatedAt(),
+              orderEntity.getDeletedAt());
+
       responseOrder.setStatusCode(HttpStatus.CREATED.value());
       responseOrder.setMessage("Success Created Order!");
       responseOrder.setTimestamp(LocalDateTime.now());
-      responseOrder.setResult(orderEntity);
+      responseOrder.setResult(orderResponse);
       return ResponseEntity.ok(responseOrder);
   }
 
@@ -79,10 +85,15 @@ public class OrderService {
           return ResponseEntity.ok(responseOrder);
       }
 
+      var orderResponse = new CreateOrderResponse(dataOrder.getId(),
+              dataOrder.getNameOrder(), dataOrder.getEmailOrder(), dataOrder.getTotalAmount(),
+              dataOrder.getOrderStatus(), dataOrder.getCreatedAt(), dataOrder.getUpdatedAt(),
+              dataOrder.getDeletedAt());
+
       responseOrder.setStatusCode(HttpStatus.OK.value());
       responseOrder.setMessage("Success Find Order Data!");
       responseOrder.setTimestamp(LocalDateTime.now());
-      responseOrder.setResult(dataOrder);
+      responseOrder.setResult(orderResponse);
       return ResponseEntity.ok(responseOrder);
   }
 }

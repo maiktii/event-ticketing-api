@@ -21,7 +21,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<OrderResponse<OrderEntity>> createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest){
         return orderService.createOrder(createOrderRequest);
     }
