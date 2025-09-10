@@ -1,8 +1,11 @@
 package com.example.boilerplate_java_springboot.service;
 
+import com.example.boilerplate_java_springboot.dto.event.EventEntityResponse;
 import com.example.boilerplate_java_springboot.dto.event.EventRequest;
 import com.example.boilerplate_java_springboot.dto.event.EventResponse;
+import com.example.boilerplate_java_springboot.dto.order.CreateOrderResponse;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
+import com.example.boilerplate_java_springboot.entity.OrderEntity;
 import com.example.boilerplate_java_springboot.repository.EventRepository;
 import com.example.boilerplate_java_springboot.repository.OrderRepository;
 import jdk.jfr.Event;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +22,11 @@ import java.util.Optional;
 public class EventService {
 
     private final EventRepository eventRepository;
-//    private final OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
-    public EventService(EventRepository eventRepository){
+    public EventService(EventRepository eventRepository, OrderRepository orderRepository){
         this.eventRepository = eventRepository;
-//        this.orderRepository = orderRepository;
+        this.orderRepository = orderRepository;
     }
 
     public EventEntity createEvent(EventRequest eventRequest){
@@ -33,6 +37,41 @@ public class EventService {
     public List<EventEntity> getAllEvent(){
         List<EventEntity> eventEntity = eventRepository.findAll();
         return eventEntity;
+    }
+
+    public EventEntityResponse getOrderByEventId(Long id){
+        EventEntity event = eventRepository.findById(id).orElse(null);
+
+        List<OrderEntity> dataOrder = orderRepository.findAll();
+        ArrayList<CreateOrderResponse> arrOrder = new ArrayList<>();
+
+        for (OrderEntity order : dataOrder){
+            if (order.getEventEntity().getId().equals(id)) {
+                CreateOrderResponse cro = new CreateOrderResponse(
+                        order.getId(),
+                        order.getNameOrder(),
+                        order.getEmailOrder(),
+                        order.getTotalAmount(),
+                        order.getOrderStatus(),
+                        order.getIsUsed(),
+                        order.getCreatedAt(),
+                        order.getUpdatedAt(),
+                        order.getDeletedAt()
+                );
+                arrOrder.add(cro);
+            }
+        }
+
+        EventEntityResponse evr = EventEntityResponse.builder()
+                .id(event.getId())
+                .eventName(event.getEventName())
+                .eventAddress(event.getEventAddress())
+                .location(event.getLocation())
+                .capacity(event.getCapacity())
+                .order(arrOrder)
+                .build();
+
+        return evr;
     }
 
     public Optional<EventEntity> getEventById(Long id){
