@@ -1,7 +1,6 @@
 package com.example.boilerplate_java_springboot.controller;
 
-import com.example.boilerplate_java_springboot.dto.order.CreateOrderRequest;
-import com.example.boilerplate_java_springboot.dto.order.OrderResponse;
+import com.example.boilerplate_java_springboot.dto.order.*;
 import com.example.boilerplate_java_springboot.entity.EventEntity;
 import com.example.boilerplate_java_springboot.entity.OrderEntity;
 import com.example.boilerplate_java_springboot.service.OrderService;
@@ -31,6 +30,20 @@ public class OrderController {
         return orderService.findOrderDetailById(id);
     }
 
+    @PostMapping("/checkins")
+    public ResponseEntity<CheckInResponse<Boolean>> validateCheckIN(@RequestBody CheckInRequest checkInRequest){
+        return orderService.validateCheckIN(checkInRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteOrderResponse<Boolean>> softDeleteOrder(@PathVariable Long id){
+        return orderService.softDeleteOrder(id);
+    }
+
+    @GetMapping
+    public ResponseEntity<ListOrderResponse<OrderEntity>> getAllOrder(){
+        return orderService.getAllOrder();
+    }
 
 
 }
